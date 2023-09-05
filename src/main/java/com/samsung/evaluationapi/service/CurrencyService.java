@@ -20,12 +20,11 @@ public class CurrencyService {
         RestTemplate template = new RestTemplate();
         ResponseEntity<String> response = template.getForEntity(endpoint, String.class);
         String responseBodyString = response.getBody();
-        JSONObject responseBodyJson = new JSONObject(responseBodyString);
         
-        JSONArray jsonArray = responseBodyJson.getJSONArray("");
+        JSONArray jsonArray = new JSONArray(responseBodyString);
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject object = jsonArray.getJSONObject(i);
-            String currencyId = object.getString("currencyId");
+            int currencyId = object.getInt("currencyId");
             String currencyCode = object.getString("currencyCode");
             String currencyDesc = object.getString("currencyDesc");
 
