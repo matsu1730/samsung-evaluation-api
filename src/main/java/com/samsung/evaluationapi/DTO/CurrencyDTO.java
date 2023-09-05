@@ -24,4 +24,19 @@ public class CurrencyDTO {
 
         return currencyList;
     }
+
+    public CurrencyModel dataToModelByCode(JSONArray jsonArray, String currencyCodeParam) {
+        CurrencyModel currency = new CurrencyModel();
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject object = jsonArray.getJSONObject(i);
+            
+            if (object.getString("currencyCode").equalsIgnoreCase(currencyCodeParam)) {
+                currency.setCurrencyId(object.getInt("currencyId"));
+                currency.setCurrencyCode(object.getString("currencyCode"));
+                currency.setCurrencyDesc(object.getString("currencyDesc"));
+            }
+        }
+        return currency;
+    }
 }

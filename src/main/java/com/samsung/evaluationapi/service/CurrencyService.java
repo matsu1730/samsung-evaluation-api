@@ -28,4 +28,18 @@ public class CurrencyService {
         return currencyList;
     }
 
+    public CurrencyModel getCurrencyByCode(String currencyCode) {
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<String> response = template.getForEntity(endpoint, String.class);
+        String responseBodyString = response.getBody();
+        
+        JSONArray jsonArray = new JSONArray(responseBodyString);
+        CurrencyDTO dto = new CurrencyDTO();
+
+        CurrencyModel currency = dto.dataToModelByCode(jsonArray, currencyCode);
+
+        return currency;
+
+    }
+
 }
